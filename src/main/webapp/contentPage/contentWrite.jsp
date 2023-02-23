@@ -49,13 +49,13 @@
           <%
            if(userID==null){
         %>
-            <li><a class="dropdown-item" href="/KHHS/userPage/userLogin.jsp">로그인</a></li>
+            <li><a class="dropdown-item" href="/userPage/userLogin.jsp">로그인</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/KHHS/userPage/userRegister.jsp">회원가입</a></li>
+            <li><a class="dropdown-item" href="/userPage/userRegister.jsp">회원가입</a></li>
             <%
            }else{
         %>
-           <li><a class="dropdown-item" href="/KHHS/userPage/userLogin.jsp">${userID}</a></li>
+           <li><a class="dropdown-item" href="/userPage/userLogin.jsp">${userID}</a></li>
            <li class="dropdown-item">
            <form method="post" action="/userCtrl?action=logout">
              <input type="submit" value="로그아웃">
@@ -75,7 +75,7 @@
 </div>
 	<div class="container">
 		<div class="row">
-			<form method="post" action="/KHHS/ContentsCtrl?action=write">
+			<form method="post" action="/ContentsCtrl?action=write">
 				<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 					<thead>
 						<tr>
@@ -101,7 +101,7 @@
 	function monthly(){
 	    let f = document.createElement('form');
 	    f.setAttribute('method', 'post');
-	    f.setAttribute('action', '/KHHS/foodCtrl?action=monthly');
+	    f.setAttribute('action', '/foodCtrl?action=monthly');
 	    document.body.appendChild(f);
 	    f.submit();
 	}
@@ -109,7 +109,7 @@
 	function contentView(){
 	    let f = document.createElement('form');
 	    f.setAttribute('method', 'post');
-	    f.setAttribute('action', '/KHHS/ContentsCtrl');
+	    f.setAttribute('action', '/ContentsCtrl');
 	    document.body.appendChild(f);
 	    f.submit();
 	}
@@ -117,7 +117,7 @@
 	function main(){
 	    let f = document.createElement('form');
 	    f.setAttribute('method', 'post');
-	    f.setAttribute('action', '/KHHS/foodCtrl');
+	    f.setAttribute('action', '/foodCtrl');
 	    document.body.appendChild(f);
 	    f.submit();
 	}

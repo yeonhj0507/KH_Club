@@ -45,9 +45,9 @@
           <%
            if(userID==null){
         %>
-            <li><a class="dropdown-item" href="/KHHS/userPage/userLogin.jsp">로그인</a></li>
+            <li><a class="dropdown-item" href="/userPage/userLogin.jsp">로그인</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/KHHS/userPage/userRegister.jsp">회원가입</a></li>
+            <li><a class="dropdown-item" href="/userPage/userRegister.jsp">회원가입</a></li>
             <%
            }else{
         %>
@@ -66,7 +66,7 @@
     </div>
   </div>
 </nav>
-<div class="container" style="margin-top : 50px;background-image: url("/KHHS/contentPage/img/lion.png")" >
+<div class="container" style="margin-top : 50px;background-image: url("/contentPage/img/lion.png")" >
    
    <div class="row" style ="padding-bottom:10%;">
    	<video autoplay controls loop muted poster="poser.png" preload="auto">
@@ -88,7 +88,7 @@
 	function monthly(){
 	    let f = document.createElement('form');
 	    f.setAttribute('method', 'post');
-	    f.setAttribute('action', '/KHHS/foodCtrl?action=monthly');
+	    f.setAttribute('action', '/foodCtrl?action=monthly');
 	    document.body.appendChild(f);
 	    f.submit();
 	}
@@ -96,7 +96,7 @@
 	function contentView(){
 	    let f = document.createElement('form');
 	    f.setAttribute('method', 'post');
-	    f.setAttribute('action', '/KHHS/ContentsCtrl?action=list');
+	    f.setAttribute('action', '/ContentsCtrl?action=list');
 	    document.body.appendChild(f);
 	    f.submit();
 	}
@@ -113,7 +113,7 @@
 	    f.appendChild(obj);
 	    
 	    f.setAttribute('method', 'post');
-	    f.setAttribute('action', '/KHHS/foodCtrl');
+	    f.setAttribute('action', '/foodCtrl');
 	    document.body.appendChild(f);
 	    f.submit();
 	}

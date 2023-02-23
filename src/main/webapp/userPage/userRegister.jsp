@@ -157,7 +157,7 @@ window.onload = function() {
 </head>
 <body>
  <div>
-  	<form method ="post" action="/KHHS/UserCtrl?action=join">
+  	<form method ="post" action="/UserCtrl?action=join">
 		<!--  <form action="" method="get"> -->
 		
  		<div id="container">
