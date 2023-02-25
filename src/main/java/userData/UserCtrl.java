@@ -1,79 +1,55 @@
 package userData;
 
- 
-
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.sql.SQLException;
 
- 
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.RequestDispatcher;
+import foodData.foodCtrl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import foodData.foodCtrl;
- 
+import jakarta.servlet.http.HttpSession;
 
-/**
-* Servlet implementation class UserCtrl
-*/
 @WebServlet("/UserCtrl")
 public class UserCtrl extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
- 
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public UserCtrl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
- 
-
-    /**
-     * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        String loginid = request.getParameter("loginid");
-        String loginpw = request.getParameter("loginpw");
+        String loginid = request.getParameter("userID");
+        String loginpw = request.getParameter("pw");
         UserDAO dao = new UserDAO();
-        System.out.println("action: " + action);
         HttpSession session = request.getSession();
 
         if(action.equals("join")) {
             String name = request.getParameter("name");
             int grade = Integer.parseInt(request.getParameter("grade"));
-
             int permission = 0;
             UserDO p = new UserDO(loginid, name, grade, loginpw, permission);
-            try {
-                dao.insert(p);
-                response.sendRedirect("userPage/userLogin.jsp");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dao.insert(p);
+            response.sendRedirect("userPage/userLogin.jsp");
         }
         
         if(action.equals("logout")) {
-        	response.sendRedirect("Main.jsp?userID="+null);
+        	session.removeAttribute("userID");
+        	response.sendRedirect("/Main.jsp");
         }
         
         if(action.equals("login")) {
-            UserDO p = dao.findById(loginid);
-            System.out.println("로그인됨");
+            UserDO p = dao.getById(loginid);
+//            System.out.println(p.pw);
             if(p.pw.equals(loginpw)) {
+            	System.out.println("비밀번호 일치");
+            	System.out.println(loginpw);
+            	System.out.println(p.pw);
                 if(p.permission == 1) {
                 	session.setAttribute("userID", loginid);
                     foodCtrl foodCtrl = new foodCtrl();
 					foodCtrl.service(request, response);
-				
                 } else {
                     response.sendRedirect("userPage/userLogin.jsp");
                 }
@@ -81,8 +57,6 @@ public class UserCtrl extends HttpServlet {
                 response.sendRedirect("userPage/userLogin.jsp");
             }
         }
-    }
-
- 
+    } 
 
 }

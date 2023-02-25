@@ -24,6 +24,9 @@ public class UserDO {
 		this.permission = permission;
 	}
 	
+	public UserDO() {
+	}
+
 	//get
 	public String getName(){
 		return this.name;
@@ -44,5 +47,27 @@ public class UserDO {
 	public int getPermission() {
 		return this.permission;
 	}
+	
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
+	public void setPermission(int permission) {
+		this.permission = permission;
+	}
+
+
 
 }

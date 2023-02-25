@@ -16,18 +16,16 @@
 <div class="loginbox">
   <h2>경희고등학교</h2>
   <form method="post" action="/UserCtrl?action=login">
-    <!--작성하지 않아도 문제는 없음-->
     <fieldset>
       <legend style = "margin-top: 0px;">로그인</legend>
       <label for="loginid">아이디(E-mail)</label>
-      <input type="text" name="loginid" placeholder="아이디(E-mail)을 입력해 주세요" value="dawnfire05">
+      <input type="text" name="userID" placeholder="아이디(E-mail)을 입력해 주세요">
       <label for="loginpw">비밀번호</label>
-      <input type="password" name="loginpw" placeholder="비밀번호를 입력해 주세요" value = "dawnfire05">
+      <input type="password" name="pw" placeholder="비밀번호를 입력해 주세요">
       <ul>
-        <li><a href="#">아이디/비밀번호찾기</a></li>
+        <!--<li><a href="#">아이디/비밀번호찾기</a></li>-->
         <li><a href="userRegister.jsp">회원가입</a></li>
       </ul>
-      <!--데이터를 서버로 전송-->
       <button type="submit" style="background-color: #9E1915">로그인</button>
     </fieldset>
   </form>

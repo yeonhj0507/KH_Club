@@ -14,58 +14,8 @@
 <title>이번 달 급식</title>
 </head>
 <body>
-<% 
-      String userID=null;
-      if(request.getAttribute("userID")!=null){
-         userID=(String)request.getAttribute("userID");
-      }
-%>
-   <nav class="navbar navbar-expand-lg" style="background-color: #9E1915; font-size:20px;">
-  <div class="container-fluid">
-    <a class="navbar-brand text-light" href="javascript:void(0)" onClick="javascript:main()">경희고등학교</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-      <ul class="navbar-nav mb-2 mb-sm-0">
-        <li class="nav-item">
-          <a class="nav-link active text-light" aria-current="page" href="javascript:void(0)" onClick="javascript:monthly()">급식안내</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="javascript:void(0)" onClick="javascript:contentView()">게시판</a>
-        </li>
-        </ul>
-        
-        <ul class="navbar-nav" >
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            계정관리
-          </a>
-          <ul class="dropdown-menu">
-          <%
-           if(userID==null){
-        %>
-            <li><a class="dropdown-item" href="/userPage/userLogin.jsp">로그인</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/userPage/userRegister.jsp">회원가입</a></li>
-            <%
-           }else{
-        %>
-           <li><a class="dropdown-item" href="/userPage/userLogin.jsp">${userID}</a></li>
-           <li class="dropdown-item">
-           <form method="post" action="/userCtrl?action=logout">
-             <input type="submit" value="로그아웃">
-             </form>         
-              </li>
-         <%
-        }
-        %>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<%@ include file="/menu.jsp" %>
+
 <div class="text-center">
   <img src="/contentPage/img/lion.png" class="rounded" alt="..." width="85" height="125">
 </div>
@@ -124,7 +74,7 @@ function monthly(){
 function contentView(){
     let f = document.createElement('form');
     f.setAttribute('method', 'post');
-    f.setAttribute('action', '/ContentsCtrl');
+    f.setAttribute('action', '/ContentsCtrl?action=list');
     document.body.appendChild(f);
     f.submit();
 }
