@@ -19,7 +19,6 @@ public class ContentsCtrl extends HttpServlet {
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int contentId = 0;
 		ContentsDAO dao = new ContentsDAO();
 		String action = request.getParameter("action");
 		
@@ -32,7 +31,9 @@ public class ContentsCtrl extends HttpServlet {
 			String title = request.getParameter("title");
 			String content= request.getParameter("content");
 			
-			ContentsDO c = new ContentsDO(contentId, title, content);
+			ContentsDO c = new ContentsDO();
+			c.setTitle(title);
+			c.setContent(content);
 			dao.insert(c);
 
 			RequestDispatcher dispacher = request.getRequestDispatcher("/ContentsCtrl?action=list");

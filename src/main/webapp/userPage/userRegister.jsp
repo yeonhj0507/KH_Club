@@ -206,7 +206,8 @@ window.onload = function() {
                   		
                       	<br>
                       	
-<p>< 경희고등학교 >('http://10.240.6.34:8080'이하 'KHHS')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
+<p>
+< 경희고등학교 >('http://10.240.6.34:8080'이하 'KHHS')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
 
 제1조(개인정보의 처리목적)
 
@@ -413,11 +414,11 @@ window.onload = function() {
               	 </div>
             	 <br>
             	 <div class="btn_area">
-                 	<input type="submit" value="가입하기" id="btnJoin" class="btn_type btn_primary"><a href="logIn.jsp"></a>
+                 	<input type="submit" value="가입하기" id="btnJoin" class="btn_type btn_primary"><a href="userLogin.jsp"></a>
 				 </div>
 			</div>
 		</form>
 	</div>
-             <p>이미 회원이신가요? <a href="logIn.jsp">로그인 하기</a></p><br><br>  <!-- 로그인 페이지로 이동, " " 안에 로그인 페이지 파일 넣기 -->
+             <p>이미 회원이신가요? <a href="userLogin.jsp">로그인 하기</a></p><br><br>  <!-- 로그인 페이지로 이동, " " 안에 로그인 페이지 파일 넣기 -->
 </body>
 </html>

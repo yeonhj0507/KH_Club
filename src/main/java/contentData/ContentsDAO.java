@@ -11,6 +11,7 @@ import java.util.List;
  public class ContentsDAO {
 	 Connection conn = null;
 	 PreparedStatement pstmt;
+	 ResultSet rs;
 	 
 	 final String JDBC_URL = "jdbc:mysql://183.111.138.245:3306/khhs?useUnicode=true&serverTimezone=Asia/Seoul";
 	 final String db_id = "khhs";
@@ -50,13 +51,12 @@ import java.util.List;
 		 
 		 try {
 			 pstmt = conn.prepareStatement("SELECT * FROM content order by postID desc");
-			 ResultSet rs = pstmt.executeQuery();
+			 rs = pstmt.executeQuery();
 			 
 			 while(rs.next()) {
 				 ContentsDO content = new ContentsDO();
 				 content.setPostID(rs.getInt("postID"));
 				 content.setTitle(rs.getString("title"));
-				 content.setContent(null);
 				 contents.add(content);
 			 }
 		 }catch(Exception e) {e.printStackTrace();}
@@ -65,20 +65,21 @@ import java.util.List;
 		 return contents;
 	 }
 	 
-	 public ContentsDO getByID(int id){
+	public ContentsDO getByID(int id){
 		 open();
-		 ContentsDO content = null;
-
+		 ContentsDO content = new ContentsDO();
 		 
 		 try {
 			 String sql = "SELECT * FROM content where postID = ?";
 			 pstmt=conn.prepareStatement(sql);
 			 pstmt.setInt(1, id);
-			 ResultSet rs = pstmt.executeQuery();
+			 rs = pstmt.executeQuery();
 			 
 			 while(rs.next()) {
-				 content = new ContentsDO(rs.getInt("postID"),
-						 rs.getString("title"),rs.getString("content"));
+				 content.setPostID(rs.getInt("postID"));
+				 content.setTitle(rs.getString("title"));
+				 content.setContent(rs.getString("content"));
+				 content.setCreateTime(rs.getTimestamp("createTime"));
 			 }
 		 }catch(Exception e) {e.printStackTrace();}
 		 
@@ -93,7 +94,7 @@ import java.util.List;
 		try {
 			String sql = "SELECT MAX(postID) FROM content";
 			pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			
 			while(rs.next()) {
@@ -115,7 +116,7 @@ import java.util.List;
 		try {
 			String sql = "SELECT COUNT(*) FROM content";
 			pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			
 			while(rs.next()) {

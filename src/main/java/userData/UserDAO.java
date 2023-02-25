@@ -8,112 +8,114 @@
 package userData;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class UserDAO {
     Connection conn;
-    Statement stmt;
+    PreparedStatement pstmt;
     ResultSet rs;
     
-	public UserDAO(){
-		String conip = "183.111.138.245:3306";
-		String conid = "khhs";
-		String conpw = "Fire05dawn!";
-	    try{
-	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	String url = "jdbc:mysql://"+ conip +"/khhs?useUnicode=true&serverTimezone=Asia/Seoul";
-	    	conn = DriverManager.getConnection(url,conid,conpw);
-	    	stmt=conn.createStatement();
-	    	System.out.println("연결 성공");
-	    }
-	    catch(ClassNotFoundException e){
-	    	System.out.println("드라이버 로딩 실패");
-	    }
-	    catch(SQLException e){
-	    	System.out.println("에러: " + e);
-	    }
-	    
-	}
+	 final String JDBC_URL = "jdbc:mysql://183.111.138.245:3306/khhs?useUnicode=true&serverTimezone=Asia/Seoul";
+	 final String db_id = "khhs";
+	 final String db_pw = "Fire05dawn!";
+    
+    public void open() {
+		 try {
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+			 conn = DriverManager.getConnection(JDBC_URL,db_id,db_pw);
+		 }catch(Exception e) {e.printStackTrace();}
+	 }
+	 
+	 public void close() {
+		 try { pstmt.close(); conn.close();}
+		 catch(SQLException e){ e.printStackTrace();}
+	 }
 	
 
-	public void insert(UserDO user)throws SQLException{
-		String fmt = "INSERT INTO user VALUES('%s', '%s', %d, '%s', %d)";
-		String query = String.format(fmt, user.getUserID(), user.getName(), 
-				user.getGrade(), user.getPw(), user.getPermission());
-        stmt.execute(query);
-        kill();
+	public void insert(UserDO user){
+		open();
+		
+		try {
+			String sql = "INSERT INTO user(userID, name, grade, pw, permission) VALUES(?, ?, ?, ?, ?)";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, user.getUserID());
+			pstmt.setString(2, user.getName());
+			pstmt.setInt(3, user.getGrade());
+			pstmt.setString(4, user.getPw());
+			pstmt.setInt(5, user.getPermission());
+	        pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+        close();
 	}
 	
 	public List<UserDO> findAll(){
+		open();
 		ArrayList<UserDO> users = new ArrayList<UserDO>();
+		
 		try {
-			rs = stmt.executeQuery("SELECT * FROM user");
+			pstmt = conn.prepareStatement("SELECT * FROM user");
+			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
-				users.add(new UserDO(rs.getString("userID"), rs.getString("name"),
-						rs.getInt("grade"), rs.getString("pw"), rs.getInt("permission")));
-			kill();
+				UserDO user = new UserDO();
+				user.setUserID(rs.getString("userID"));
+				user.setName(rs.getString("name"));
+				user.setGrade(rs.getInt("grade"));
+				user.setPw(rs.getString("pw"));
+				user.setPermission(rs.getInt("permission"));
+				users.add(user);
 			}
 		}
-        catch (SQLException e) { e.printStackTrace(); }
+        catch (SQLException e) { e.printStackTrace();}
+		
+		close();
 		return users;
 	}
 	
-	public UserDO findById(String id) {
-		UserDO user = null;
+	public UserDO getById(String id) {
+		open();
+		UserDO user = new UserDO();
+		
 		try {
-			String fmt = "SELECT userID, name, grade, pw, permission FROM user WHERE UserID = '%s'";
-			String q = String.format(fmt, id);
-			rs = stmt.executeQuery(q);
-			if(rs.next()) {
-				user = new UserDO(rs.getString("userID"), rs.getString("name"),
-						rs.getInt("grade"), rs.getString("pw"), rs.getInt("permission"));
+			String sql = "SELECT userID, name, grade, pw, permission FROM user WHERE UserID = ?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				user.setUserID(rs.getString("userID"));
+				user.setName(rs.getString("name"));
+				user.setGrade(rs.getInt("grade"));
+				user.setPw(rs.getString("pw"));
+				user.setPermission(rs.getInt("permission"));	
 			}
-			else {
-				return null;
-			}
-			kill();
-
 		}
         catch (SQLException e) { e.printStackTrace();}
+		
+		close();
 		return user;
-
 	}
 	
 	public void delete(String id) {
         try {
-            String fmt = "DELETE FROM user WHERE userID = '%s'";
-            String q = String.format(fmt, id);
-            stmt.execute(q);
-            kill();
+            String sql = "DELETE FROM user WHERE userID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.execute();
         }
         catch (SQLException e) { e.printStackTrace(); }
+        close();
 	}
 	
 	public void delete(UserDO u) {
 		delete(u.getUserID());
-	}
-	
-	
-	
-	
-	public void kill() {
-		try{
-            if( conn != null && !conn.isClosed()){
-                conn.close();
-				 System.out.println("연결 종료");
-
-            }
-        }
-        catch( SQLException e){
-            e.printStackTrace();
-        }
 	}
 	
 }

@@ -1,14 +1,18 @@
 package contentData;
 
+import java.sql.Timestamp;
+
 public class ContentsDO {
 	int postID;
 	String title;
 	String content;
+	Timestamp createTime;
 	
-	public ContentsDO(int postID, String title, String content) {
+	public ContentsDO(int postID, String title, String content, java.sql.Timestamp timestamp) {
 		this.postID = postID;
 		this.title = title;
 		this.content = content;
+		this.createTime = timestamp;
 	}
 	
 	public ContentsDO() {
@@ -25,6 +29,10 @@ public class ContentsDO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 
 	public int getPostID() {
 		return this.postID;
@@ -37,4 +45,10 @@ public class ContentsDO {
 	public String getContent() {
 		return this.content;
 	}
+	
+	public Timestamp getCreateTime() {
+		return this.createTime;
+	}
+
+
 }

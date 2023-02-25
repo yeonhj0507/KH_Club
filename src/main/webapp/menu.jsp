@@ -7,55 +7,54 @@
 <title>menu</title>
 </head>
 <body>
-<%
-	  HttpSession s = request.getSession();
-      String userID = (String)session.getAttribute("userID");
-%>
-   <nav class="navbar navbar-expand-lg" style="background-color: #9E1915; font-size:20px;">
-  <div class="container-fluid">
-    <a class="navbar-brand text-light" href="javascript:void(0)" onClick="javascript:main()">경희고등학교</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-      <ul class="navbar-nav mb-2 mb-sm-0">
-        <li class="nav-item">
-          <a class="nav-link active text-light" aria-current="page" href="javascript:void(0)" onClick="javascript:monthly()">급식안내</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="javascript:void(0)" onClick="javascript:contentView()">게시판</a>
-        </li>
-        </ul>
-        
-        <ul class="navbar-nav" >
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            계정관리
-          </a>
-          <ul class="dropdown-menu">
-          <%
-           if(userID==null){
-        %>
-            <li><a class="dropdown-item" href="/userPage/userLogin.jsp">로그인</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/userPage/userRegister.jsp">회원가입</a></li>
-            <%
-           }else{
-        %>
-           <li class="dropdown-item"> <%out.print(userID);%> </li>
-           <li>
-           <form method="post" action="/userCtrl?action=logout">
-             <input class="dropdown-item" type="submit" value="로그아웃">
-           </form>         
-           </li>
-         <%
-        }
-        %>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
+	<%
+		HttpSession s = request.getSession();
+		String userID = (String)session.getAttribute("userID");
+	%>
+<nav class="navbar navbar-expand-lg" style="background-color: #9E1915; font-size:20px;">
+	<div class="container-fluid">
+		<a class="navbar-brand text-light" href="javascript:void(0)" onClick="javascript:main()">경희고등학교</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+			<ul class="navbar-nav mb-2 mb-sm-0">
+				<li class="nav-item">
+					<a class="nav-link active text-light" aria-current="page" href="javascript:void(0)" onClick="javascript:monthly()">급식안내</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-light" href="javascript:void(0)" onClick="javascript:contentView()">게시판</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav" >
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						계정관리
+					</a>
+					<ul class="dropdown-menu">
+						<%
+						if(userID==null){
+						%>
+				            <li><a class="dropdown-item" href="/userPage/userLogin.jsp">로그인</a></li>
+				            <li><hr class="dropdown-divider"></li>
+				            <li><a class="dropdown-item" href="/userPage/userRegister.jsp">회원가입</a></li>
+						<%
+         				}else{
+        				%>
+        				<li class="dropdown-item"> <%out.print(userID);%> </li>
+						<li>
+           					<form method="post" action="/UserCtrl?action=logout">
+								<input class="dropdown-item" type="submit" value="로그아웃">
+							</form>
+						</li>
+				        <%
+				        }
+				        %>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
 </nav>
 
 <script>

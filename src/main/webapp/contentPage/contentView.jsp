@@ -23,13 +23,13 @@
 				<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
 					<thead>
 						<tr>
-							<th colspan="3" style="background-color:#eeeeee; text-align: center;">게시판 글보기</th>
+							<th colspan="3" style="background-color:#eeeeee; text-align: center;">${content.getTitle()}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td style="width: 20%;">글 제목</td>
-							<td colspan="2">${content.getTitle()}</td>
+							<td style="width: 20%;">작성일시</td>
+							<td colspan="2">${content.getCreateTime()}</td>
 						</tr>
 						<tr>
 							<td>내용</td>
