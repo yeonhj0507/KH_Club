@@ -40,19 +40,6 @@ public class UserDAO {
 	    	System.out.println("에러: " + e);
 	    }
 	    
-	    /*
-	    finally{
-	        try{
-	            if( conn != null && !conn.isClosed()){
-	                conn.close();
-	            }
-	        }
-	        catch( SQLException e){
-	            e.printStackTrace();
-	        }
-	    }
-	    */
-	    
 	}
 	
 
@@ -60,7 +47,8 @@ public class UserDAO {
 		String fmt = "INSERT INTO user VALUES('%s', '%s', %d, '%s', %d)";
 		String query = String.format(fmt, user.getUserID(), user.getName(), 
 				user.getGrade(), user.getPw(), user.getPermission());
-        stmt.execute(query);		
+        stmt.execute(query);
+        kill();
 	}
 	
 	public List<UserDO> findAll(){
@@ -70,6 +58,7 @@ public class UserDAO {
 			while(rs.next()) {
 				users.add(new UserDO(rs.getString("userID"), rs.getString("name"),
 						rs.getInt("grade"), rs.getString("pw"), rs.getInt("permission")));
+			kill();
 			}
 		}
         catch (SQLException e) { e.printStackTrace(); }
@@ -89,6 +78,7 @@ public class UserDAO {
 			else {
 				return null;
 			}
+			kill();
 
 		}
         catch (SQLException e) { e.printStackTrace();}
@@ -101,6 +91,7 @@ public class UserDAO {
             String fmt = "DELETE FROM user WHERE userID = '%s'";
             String q = String.format(fmt, id);
             stmt.execute(q);
+            kill();
         }
         catch (SQLException e) { e.printStackTrace(); }
 	}
@@ -116,6 +107,8 @@ public class UserDAO {
 		try{
             if( conn != null && !conn.isClosed()){
                 conn.close();
+				 System.out.println("연결 종료");
+
             }
         }
         catch( SQLException e){

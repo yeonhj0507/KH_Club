@@ -1,10 +1,3 @@
-/*
-	게시글의 DO.
-	2022.12.10 생성
-	생성자 연현중
-	-이하 수정사항 자율 기록-
- */
-
 package contentData;
 
 public class ContentsDO {
@@ -18,6 +11,21 @@ public class ContentsDO {
 		this.content = content;
 	}
 	
+	public ContentsDO() {
+	}
+
+	public void setPostID(int postID) {
+		this.postID = postID;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public int getPostID() {
 		return this.postID;
 	}

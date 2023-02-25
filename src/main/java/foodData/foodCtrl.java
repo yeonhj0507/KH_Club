@@ -21,24 +21,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-/**
- * Servlet implementation class foodCtrl
- */
 @WebServlet("/foodCtrl")
 public class foodCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public foodCtrl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMM");
@@ -84,7 +74,6 @@ public class foodCtrl extends HttpServlet {
             int dayOfWeekNumber = dayOfWeek.getValue();
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
-            System.out.println(action);
             String userID = (String)session.getAttribute("userID");
 
             if(userID!=null) {
@@ -92,9 +81,8 @@ public class foodCtrl extends HttpServlet {
             }
             
             if (action==null || action.equals("login")) {
-            	System.out.println("히히4");
                 if(todayFood == null) {
-                	request.setAttribute("food", "오늘 급식이 없습니다.");
+                	request.setAttribute("food", "오늘은 급식이 없습니다.");
                 } else {
             		request.setAttribute("food", todayFood);
                 }

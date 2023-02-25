@@ -1,13 +1,7 @@
-/*
-	게시글 컨트롤러
-	2022.12.10 생성
-	생성자 연현중
-	-이하 수정사항 자율 기록-
- */
 package contentData;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -16,29 +10,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import userData.UserDAO;
-
-/**
- * Servlet implementation class ContentsCtrl
- */
 @WebServlet("/ContentsCtrl")
 public class ContentsCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ContentsCtrl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int contentId = 0;
 		ContentsDAO dao = new ContentsDAO();
-		int postID = dao.findRecentID() + 1;
 		String action = request.getParameter("action");
 		
 		if(action.equals("list")) {
@@ -50,24 +32,33 @@ public class ContentsCtrl extends HttpServlet {
 			String title = request.getParameter("title");
 			String content= request.getParameter("content");
 			
-			ContentsDO c = new ContentsDO(postID, title, content);
-			try {
-				dao.insert(c);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			RequestDispatcher dispacher = request.getRequestDispatcher("contentList.jsp");
+			ContentsDO c = new ContentsDO(contentId, title, content);
+			dao.insert(c);
+
+			RequestDispatcher dispacher = request.getRequestDispatcher("/ContentsCtrl?action=list");
 			dispacher.forward(request,response);
-			}
 		}
+		
+		if(action.equals("view")) {
+			int postID = Integer.parseInt(request.getParameter("postID"));
+			ContentsDO c = dao.getByID(postID);
+			request.setAttribute("content", c);
+			RequestDispatcher dispacher = request.getRequestDispatcher("/contentPage/contentView.jsp");
+			dispacher.forward(request, response);
+		}
+	}
+		
+
 	
 	public String contentsList(HttpServletRequest request) {
 		ContentsDAO dao = new ContentsDAO();
 		
-		String[] list = new String[dao.findRecentID()];
-		for(int i=0; i<dao.findRecentID(); i++) {
-			list[i] = dao.findByID(dao.findRecentID()-i).title;
-		}
+//		String[] list = new String[dao.getRecentID()];
+//		for(int i=0; i<dao.getRecentID(); i++) {
+//			list[i] = dao.getByID(dao.getRecentID()-i).title;
+//		}
+		List<ContentsDO> list = dao.getAll();
+		
 		request.setAttribute("list", list);
 		return "contentPage/contentList.jsp";
 	}

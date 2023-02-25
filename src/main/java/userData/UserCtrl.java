@@ -17,34 +17,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import foodData.foodCtrl;
  
 
-/**
-* Servlet implementation class UserCtrl
-*/
 @WebServlet("/UserCtrl")
 public class UserCtrl extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
  
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public UserCtrl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
- 
-
-    /**
-     * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String loginid = request.getParameter("loginid");
         String loginpw = request.getParameter("loginpw");
         UserDAO dao = new UserDAO();
-        System.out.println("action: " + action);
         HttpSession session = request.getSession();
 
         if(action.equals("join")) {
