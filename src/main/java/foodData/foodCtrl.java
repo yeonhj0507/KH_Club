@@ -75,7 +75,6 @@ public class foodCtrl extends HttpServlet {
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
             String userID = (String)session.getAttribute("userID");
-            
 
             if(userID!=null) {
             	request.setAttribute("userID", userID);

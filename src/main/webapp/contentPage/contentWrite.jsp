@@ -34,7 +34,9 @@
 						</tr>
 					</tbody>
 				</table>
+
 				<input type="submit" class="btn pull-right text-light" style="background-color: #9E1915" value="업로드">
+
 			</form>
 		</div>
 	</div>

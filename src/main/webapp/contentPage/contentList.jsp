@@ -27,7 +27,6 @@
 						<th style="background-color:#eeeeee; text-align: center;">번호</th>
 						<th style="background-color:#eeeeee; text-align: center;">제목</th>
 						<th style="background-color:#eeeeee; text-align: center;">작성자</th>
-						
 					</tr>
 				</thead>
 				<tbody>

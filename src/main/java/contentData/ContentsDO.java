@@ -10,6 +10,7 @@ public class ContentsDO {
 	Timestamp createTime;
 	
 	public ContentsDO(int postID, String title, String content, String writer, java.sql.Timestamp timestamp) {
+
 		this.postID = postID;
 		this.title = title;
 		this.content = content;
@@ -34,6 +35,7 @@ public class ContentsDO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
@@ -56,6 +58,5 @@ public class ContentsDO {
 	public Timestamp getCreateTime() {
 		return this.createTime;
 	}
-	
 
 }

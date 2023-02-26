@@ -32,7 +32,6 @@
 							<td colspan="2">${content.getWriter()}</td>
 							<td style="width: 20%;">작성일시</td>
 							<td colspan="2">${content.getCreateTime()}</td>
-							
 						</tr>
 						<tr>
 							<td>내용</td>
