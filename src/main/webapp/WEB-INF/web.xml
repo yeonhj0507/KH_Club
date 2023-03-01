@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>CommentCtrl</display-name>
+    <servlet-name>CommentCtrl</servlet-name>
+    <servlet-class>contentData.CommentCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommentCtrl</servlet-name>
+    <url-pattern>/CommentCtrl</url-pattern>
+  </servlet-mapping>
 </web-app>
