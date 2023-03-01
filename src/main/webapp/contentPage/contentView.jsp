@@ -36,9 +36,10 @@
 						<tr>
 							<td>내용</td>
 							<td colspan="5" style="height:200px; text-align: left;">${content.getContent()}</td>
-						</tr>
+						</tr>		
 					</tbody>
 				</table>
+				<button onclick="location.href='/ContentsCtrl?action=like'" class="btn text-white" style="background-color: #9E1915">좋아요</button>
 				<button type="button" onclick="location.href='/ContentsCtrl?action=list'" class="btn text-white" style="background-color: #9E1915">목록</button>
 			</form>
 		</div>

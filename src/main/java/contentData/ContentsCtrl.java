@@ -24,6 +24,9 @@ public class ContentsCtrl extends HttpServlet {
 		ContentsDAO dao = new ContentsDAO();
 		String action = request.getParameter("action");
 		String view = null;
+		if(action.equals("like")) {
+			
+		}
 		
 		if(action.equals("list")) {
 			RequestDispatcher dispacher = request.getRequestDispatcher(contentsList(request));
