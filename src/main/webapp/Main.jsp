@@ -14,9 +14,6 @@
 <%@ include file="/menu.jsp" %>
 <div class="container" style="margin-top : 50px;background-image: url("/contentPage/img/lion.png")" >
 	<div class="row" style ="padding-bottom:10%;">
-		<video autoplay controls loop muted poster="poser.png" preload="auto" width="640" height="360">
-			<source src="movie.mp4" type="video/mp4">
-		</video>
 	</div>
 	<div class="row " style = "padding-bottom:10%;" >
 		<div class ="col-7 bg-white border border-secondary rounded-1 shadow-lg align-content-around flex-wrap" style="margin:auto; "> 

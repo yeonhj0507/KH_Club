@@ -36,29 +36,28 @@
  
  <c:set var="flag" value="false"/>
  
- <c:forEach var="i" begin="1" end ="${date1}" step="1">
+ <c:forEach var="i" begin="1" end ="${date}" step="1">
  	<th scope="col" style="width:300px"></th>
  </c:forEach>
  
- <c:forEach var="i" begin="1" end ="${date}" step="1">
+ <c:forEach var="i" begin="1" end ="${date1}" step="1">
  	<th scope="col" style="width:300px">${food[i-1]}</th>
  </c:forEach>
  
  </tr>
  
- <c:forEach var="i" begin="1" end = "4" step="1">
  <c:if test="${not flag}">
+ <c:forEach var="i" begin="1" end = "4" step="1">
  	<tr>
  	<c:forEach var="j" begin="0" end="4" step="1">
- 		<c:if test="${empty food}">
- 			<c:set var="flag" value="true"/>
- 		</c:if>
  		 <th scope="col" style="width:300px">${food[i*5+j+date1]}</th>
+ 		 <c:if test="${empty food}">
+ 			<c:set var="flag" value="true"/>
+ 		 </c:if>
  	</c:forEach>
  	</tr>
-</c:if>
 </c:forEach>
-
+</c:if>
 </table>
 </div>
 </div>

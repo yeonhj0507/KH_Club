@@ -95,7 +95,7 @@ public class foodCtrl extends HttpServlet {
             	request.setAttribute("date", dayOfWeekNumber-1);
             	request.setAttribute("date1", 6-dayOfWeekNumber);
             	request.setAttribute("food", food);
-         
+            	
             	RequestDispatcher dispatcher = request.getRequestDispatcher("/foodPage/food.jsp");
             	dispatcher.forward(request, response);
             }

@@ -23,6 +23,10 @@ public class ContentsCtrl extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ContentsDAO dao = new ContentsDAO();
 		String action = request.getParameter("action");
+		String view = null;
+		if(action.equals("like")) {
+			
+		}
 		
 		if(action.equals("list")) {
 			RequestDispatcher dispacher = request.getRequestDispatcher(contentsList(request));
@@ -34,21 +38,29 @@ public class ContentsCtrl extends HttpServlet {
 			String content= request.getParameter("content");
 			HttpSession session = request.getSession();
             String userID = (String)session.getAttribute("userID");
-			
-			ContentsDO c = new ContentsDO();
-			c.setTitle(title);
-			c.setContent(content);
-			c.setWriter(userID);
-			dao.insert(c);
-
-			RequestDispatcher dispacher = request.getRequestDispatcher("/ContentsCtrl?action=list");
-			dispacher.forward(request,response);
+            
+            if(title.equals("") || content.equals("")) {
+            	session.setAttribute("error", "제목이나 내용을 입력하세요");
+            	view = "/contentPage/contentWrite.jsp";
+            	response.sendRedirect(view);
+            } else {
+            	ContentsDO c = new ContentsDO();
+    			c.setTitle(title);
+    			c.setContent(content);
+    			c.setWriter(userID);
+    			dao.insert(c);
+    			session.setAttribute("error", null);
+    			
+    			view = "/ContentsCtrl?action=list";
+    			response.sendRedirect(view);
+            }
 		}
 		
 		if(action.equals("view")) {
 			int postID = Integer.parseInt(request.getParameter("postID"));
 			ContentsDO c = dao.getByID(postID);
 			request.setAttribute("content", c);
+			view = "/contentPage/contentView.jsp";
 			RequestDispatcher dispacher = request.getRequestDispatcher("/contentPage/contentView.jsp");
 			dispacher.forward(request, response);
 		}
@@ -58,11 +70,6 @@ public class ContentsCtrl extends HttpServlet {
 	
 	public String contentsList(HttpServletRequest request) {
 		ContentsDAO dao = new ContentsDAO();
-		
-//		String[] list = new String[dao.getRecentID()];
-//		for(int i=0; i<dao.getRecentID(); i++) {
-//			list[i] = dao.getByID(dao.getRecentID()-i).title;
-//		}
 		List<ContentsDO> list = dao.getAll();
 		
 		request.setAttribute("list", list);

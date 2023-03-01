@@ -9,7 +9,7 @@
 <body>
 	<%
 		HttpSession s = request.getSession();
-		String userID = (String)session.getAttribute("userID");
+		String userID = (String)s.getAttribute("userID");
 	%>
 <nav class="navbar navbar-expand-lg" style="background-color: #9E1915; font-size:20px;">
 	<div class="container-fluid">

@@ -35,12 +35,26 @@
 						</tr>
 						<tr>
 							<td>내용</td>
-							<td colspan="2" style="height:200px; text-align: left;">${content.getContent()}</td>
-						</tr>
+							<td colspan="5" style="height:200px; text-align: left;">${content.getContent()}</td>
+						</tr>		
 					</tbody>
 				</table>
+			</form>
+			
+			<form method="post" action="CommentCtrl?action=write">
+				<div>
+					<div>
+						<textarea placeholder="댓글을 입력해주세요" ></textarea>
+					</div>
+					<div>
+						<button id="btn">댓글달기</button>
+					</div>
+				</div>
+			</form>
+			<form>
 				<button type="button" onclick="location.href='/ContentsCtrl?action=list'" class="btn text-white" style="background-color: #9E1915">목록</button>
 			</form>
+			
 		</div>
 	</div>
 	<script src = "https://code.jquery.com/jquery-3.1.1.min.js"></script>

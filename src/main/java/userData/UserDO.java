@@ -9,11 +9,11 @@ package userData;
 
 public class UserDO {
 	
-	String userID;
-	String name;
-	int grade;
-	String pw;
-	int permission;
+	private String userID;
+	private String name;
+	private int grade;
+	private String pw;
+	private int permission;
 	
 	
 	public UserDO(String userID, String name, int grade, String pw, int permission) {
