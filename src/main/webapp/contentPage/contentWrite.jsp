@@ -24,6 +24,14 @@
 						<tr>
 							<th colspan="2" style="background-color:#eeeeee; text-align: center;">글쓰기</th>
 						</tr>
+						<% String errorMsg = (String)session.getAttribute("error");
+						if (errorMsg != null) {%>
+						<tr>
+							<td colspan="2" style="background-color:#eeeeee; color:red; text-align: center;"><%out.print(errorMsg); %></td>
+						</tr>
+						<% }
+						session.setAttribute("error", null);
+						%>
 					</thead>
 					<tbody>
 						<tr>

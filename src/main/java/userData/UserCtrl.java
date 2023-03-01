@@ -41,12 +41,12 @@ public class UserCtrl extends HttpServlet {
         
         if(action.equals("login")) {
             UserDO p = dao.getById(loginid);
-//            System.out.println(p.pw);
-            if(p.pw.equals(loginpw)) {
+//          System.out.println(p.pw);
+            if(loginpw.equals(p.getPw())) {
             	System.out.println("비밀번호 일치");
             	System.out.println(loginpw);
-            	System.out.println(p.pw);
-                if(p.permission == 1) {
+            	System.out.println(p.getPw());
+                if(p.getPermission() == 1) {
                 	session.setAttribute("userID", loginid);
                     foodCtrl foodCtrl = new foodCtrl();
 					foodCtrl.service(request, response);
