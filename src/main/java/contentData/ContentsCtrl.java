@@ -71,6 +71,7 @@ public class ContentsCtrl extends HttpServlet {
 			int postID = Integer.parseInt(request.getParameter("postID"));
 			ContentsDO c = dao.getByID(postID);
 			request.setAttribute("content", c);
+			request.setAttribute("postID", postID);
 			view = "/contentPage/contentView.jsp";
 			RequestDispatcher dispacher = request.getRequestDispatcher("/contentPage/contentView.jsp");
 			dispacher.forward(request, response);
