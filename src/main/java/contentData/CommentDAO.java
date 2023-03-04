@@ -27,18 +27,35 @@ public class CommentDAO {
 		 try { pstmt.close(); conn.close();}
 		 catch(SQLException e){ e.printStackTrace();}
 	 }
-	 
+	 /*
 	 public void insert(CommentDO comment){
 		 open();
 		 
 		 try {
-			 String sql = "INSERT INTO content(comment, postNum, depth, order, groupNum) VALUES(?,?,?,?,?)";
+			 String sql = "INSERT INTO content(comment, postNum, depth, order, groupNum, userID) VALUES(?,?,?,?,?,?)";
 			 pstmt=conn.prepareStatement(sql);
 			 pstmt.setString(1, comment.getComment());
 			 pstmt.setInt(2, comment.getPostNum());
 			 pstmt.setInt(3, comment.getDepth());
 			 pstmt.setInt(4, comment.getOrder());
 			 pstmt.setInt(5, comment.getGroupNum());
+			 pstmt.setString(6, comment.getUserID());
+
+			 pstmt.executeUpdate();
+		 }catch(Exception e) {e.printStackTrace();}
+
+		 close();
+	 }*/
+	 
+	 public void insert(CommentDO comment){
+		 open();
+		 
+		 try {
+			 String sql = "INSERT INTO comment(comment, postID,userID) VALUES(?,?,?)";
+			 pstmt=conn.prepareStatement(sql);
+			 pstmt.setString(1, comment.getComment());
+			 pstmt.setInt(2, comment.getPostNum());
+			 pstmt.setString(3, comment.getUserID());
 
 			 pstmt.executeUpdate();
 		 }catch(Exception e) {e.printStackTrace();}

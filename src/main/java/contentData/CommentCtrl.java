@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 public class CommentCtrl extends HttpServlet {
@@ -21,13 +22,19 @@ public class CommentCtrl extends HttpServlet {
     	
     	if(action.equals("write")) {
     		String comment = request.getParameter("comment");
-    		int postNum = request.getParameter("")
+    		int postID = Integer.parseInt(request.getParameter("postID"));
+			HttpSession session = request.getSession();
+            String userID = (String)session.getAttribute("userID");
+            System.out.println(userID);
     		
     		CommentDO c = new CommentDO();
     		c.setComment(comment);
-    		c.setPostNum(0);
+    		c.setPostNum(postID);
+    		c.setUserID(userID);
+    		dao.insert(c);
     		
+    		String view = "ContentsCtrl?action=view&postID="+postID;
+    		response.sendRedirect(view);
     	}
     }
-
 }

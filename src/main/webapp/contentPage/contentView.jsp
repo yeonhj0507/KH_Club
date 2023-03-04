@@ -39,20 +39,8 @@
 					</tbody>
 				</table>
 			</form>
-			
-			<form method="post" action="CommentCtrl?action=write">
-				<div>
-					<div>
-						<textarea placeholder="댓글을 입력해주세요" ></textarea>
-					</div>
-					<div>
-						<button id="btn">댓글달기</button>
-					</div>
-				</div>
-			</form>
-			<form>
-				<button type="button" onclick="location.href='/ContentsCtrl?action=list'" class="btn text-white" style="background-color: #9E1915">목록</button>
-			</form>
+
+		<%@ include file="/contentPage/comment.jsp" %>
 			
 		</div>
 	</div>
