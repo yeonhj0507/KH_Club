@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommentDAO {
 	 Connection conn = null;
@@ -61,6 +63,27 @@ public class CommentDAO {
 		 }catch(Exception e) {e.printStackTrace();}
 
 		 close();
+	 }
+	 
+	 public List<CommentDO> getAll(int postID) {
+		 open();
+		 ArrayList<CommentDO> comments = new ArrayList<CommentDO>();
+		 
+		 try {
+			 pstmt = conn.prepareStatement("SELECT * FROM comment where postID ="+ postID + "orderby indexComments desc");
+			 rs = pstmt.executeQuery();
+			 
+			 while(rs.next()) {
+				 CommentDO comment = new CommentDO();
+				 comment.setComment(rs.getString("comment"));
+				 comment.setCreateTime(rs.getTimestamp("createTime"));
+				 comment.setUserID(rs.getString("userID"));
+				 comments.add(comment);
+			 }
+		 }catch(Exception e) {e.printStackTrace();}
+		 
+		 close();
+		 return comments;
 	 }
 
 }

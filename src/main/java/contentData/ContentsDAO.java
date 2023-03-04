@@ -36,7 +36,7 @@ import com.mysql.cj.exceptions.RSAException;
 		 open();
 		 
 		 try {
-			 String sql = "INSERT INTO content(title, content, contentUser, likeCount) VALUES(?,?,?)";
+			 String sql = "INSERT INTO content(title, content, contentUser) VALUES(?,?,?)";
 			 pstmt=conn.prepareStatement(sql);
 			 pstmt.setString(1, content.getTitle());
 			 pstmt.setString(2, content.getContent());
