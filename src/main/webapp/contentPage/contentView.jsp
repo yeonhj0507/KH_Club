@@ -34,8 +34,7 @@
 							<td colspan="2">${content.getCreateTime()}</td>
 						</tr>
 						<tr>
-							<td>내용</td>
-							<td colspan="5" style="height:200px; text-align: left;">${content.getContent()}</td>
+							<td colspan="4" style="height:200px; text-align: left;">${content.getContent()}</td>
 						</tr>		
 					</tbody>
 				</table>

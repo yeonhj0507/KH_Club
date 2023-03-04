@@ -39,7 +39,7 @@ public class ContentsCtrl extends HttpServlet {
 			HttpSession session = request.getSession();
             String userID = (String)session.getAttribute("userID");
             
-            if(title.equals("") || content.equals("")) {
+            if(title.equals("") || content==null) {
             	session.setAttribute("error", "제목이나 내용을 입력하세요");
             	view = "/contentPage/contentWrite.jsp";
             	response.sendRedirect(view);
