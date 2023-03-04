@@ -21,11 +21,22 @@ public class ContentsCtrl extends HttpServlet {
     }
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		likeDAO likedao = new likeDAO();
 		ContentsDAO dao = new ContentsDAO();
 		String action = request.getParameter("action");
 		String view = null;
 		if(action.equals("like")) {
-			
+			likeDO like = new likeDO();
+			ContentsDO content = new ContentsDO(); 
+			content = dao.getByID(Integer.parseInt(request.getParameter("content")));
+			HttpSession session = request.getSession();
+			String userID = (String)session.getAttribute("userID");
+			like.setUserID(userID);
+			like.setContentTitle(content.getTitle());
+			likedao.insert(like);
+
+			view = "/ContentsCtrl?action=view&postID="+content.getPostID();
+			response.sendRedirect(view);
 		}
 		
 		if(action.equals("list")) {
