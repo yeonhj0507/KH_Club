@@ -36,12 +36,11 @@ import com.mysql.cj.exceptions.RSAException;
 		 open();
 		 
 		 try {
-			 String sql = "INSERT INTO content(title, content, contentUser, likeCount) VALUES(?,?,?,?)";
+			 String sql = "INSERT INTO content(title, content, contentUser, likeCount) VALUES(?,?,?)";
 			 pstmt=conn.prepareStatement(sql);
 			 pstmt.setString(1, content.getTitle());
 			 pstmt.setString(2, content.getContent());
 			 pstmt.setString(3, content.getWriter());
-			 pstmt.setInt(4, content.getLikeCount());
 			 pstmt.executeUpdate();
 		 }catch(Exception e) {e.printStackTrace();}
 
@@ -61,7 +60,6 @@ import com.mysql.cj.exceptions.RSAException;
 				 content.setPostID(rs.getInt("postID"));
 				 content.setTitle(rs.getString("title"));
 				 content.setWriter(rs.getString("contentUser"));
-				 content.setLikeCount(rs.getInt("likeCount"));
 				 contents.add(content);
 			 }
 		 }catch(Exception e) {e.printStackTrace();}
@@ -86,7 +84,6 @@ import com.mysql.cj.exceptions.RSAException;
 				 content.setContent(rs.getString("content"));
 				 content.setWriter(rs.getString("contentUser"));
 				 content.setCreateTime(rs.getTimestamp("createTime"));
-				 content.setLikeCount(rs.getInt("likeCount"));
 			 }
 		 }catch(Exception e) {e.printStackTrace();}
 		 

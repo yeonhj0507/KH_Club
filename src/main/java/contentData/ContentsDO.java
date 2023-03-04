@@ -8,16 +8,14 @@ public class ContentsDO {
 	private String content;
 	private String writer;
 	private Timestamp createTime;
-	private int likeCount;
 	
-	public ContentsDO(int postID, String title, String content, String writer, java.sql.Timestamp timestamp, int likeCount) {
+	public ContentsDO(int postID, String title, String content, String writer, java.sql.Timestamp timestamp) {
 
 		this.postID = postID;
 		this.title = title;
 		this.content = content;
 		this.createTime = timestamp;
 		this.writer = writer;
-		this.setLikeCount(likeCount);
 	}
 	
 	public ContentsDO() {
@@ -59,14 +57,6 @@ public class ContentsDO {
 	}
 	public Timestamp getCreateTime() {
 		return this.createTime;
-	}
-
-	public int getLikeCount() {
-		return likeCount;
-	}
-
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
 	}
 
 }
