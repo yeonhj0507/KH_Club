@@ -5,15 +5,15 @@ public class likeDO {
 	private String contentTitle;
 	private String userID;
 	
-	public likeDO (int index, String contentTitle, String userID) {
-		this.index = index;
+	public likeDO (String contentTitle, String userID) {
 		this.contentTitle = contentTitle;
 		this.userID = userID;
 	}
 	
-	public int getIndex() {
-		return index;
+	public likeDO() {
+		// TODO Auto-generated constructor stub
 	}
+
 	public void setIndex(int index) {
 		this.index = index;
 	}
