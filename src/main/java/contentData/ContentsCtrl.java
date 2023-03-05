@@ -1,6 +1,7 @@
 package contentData;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
@@ -31,10 +32,23 @@ public class ContentsCtrl extends HttpServlet {
 			content = dao.getByID(Integer.parseInt(request.getParameter("content")));
 			HttpSession session = request.getSession();
 			String userID = (String)session.getAttribute("userID");
-			like.setUserID(userID);
-			like.setContentTitle(content.getTitle());
-			likedao.insert(like);
-
+			
+			if(userID != null) {
+				List<likeDO> likeLog = likedao.getByTitle(content.getTitle());
+				boolean ID = true;
+				
+				for(int i = 0; i<likeLog.size(); i++) {
+					if(likeLog.get(i).getUserID().equals(userID)) {
+						ID = false;
+						break;
+					}
+				}
+				if(ID) {
+					like.setUserID(userID);
+					like.setContentTitle(content.getTitle());
+					likedao.insert(like);
+				}
+			}
 			view = "/ContentsCtrl?action=view&postID="+content.getPostID();
 			response.sendRedirect(view);
 		}
@@ -70,6 +84,8 @@ public class ContentsCtrl extends HttpServlet {
 		if(action.equals("view")) {
 			int postID = Integer.parseInt(request.getParameter("postID"));
 			ContentsDO c = dao.getByID(postID);
+			int likeNum = likedao.getLikeNum(c.getTitle());
+			request.setAttribute("likeNum", likeNum);
 			request.setAttribute("content", c);
 			request.setAttribute("postID", postID);
 			view = "/contentPage/contentView.jsp";

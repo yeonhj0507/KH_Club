@@ -39,28 +39,15 @@
 					</tbody>
 				</table>
 			</form>
-<<<<<<< HEAD
-			
-			<button type="button" onclick="location.href='/ContentsCtrl?action=like&content=${content.getPostID()}'" class="btn text-white" style="background-color: #9E1915">목록</button>
-			
-			<form method="post" action="CommentCtrl?action=write">
-				<div>
-					<div>
-						<textarea placeholder="댓글을 입력해주세요" ></textarea>
-					</div>
-					<div>
-						<button id="btn">댓글달기</button>
-					</div>
-				</div>
-			</form>
-			<form>
-				<button type="button" onclick="location.href='/ContentsCtrl?action=list'" class="btn text-white" style="background-color: #9E1915">좋아요</button>
-			</form>
-=======
-
+		<% if (userID != null) {%>
+		<form>
+			<button type="button" onclick="location.href='/ContentsCtrl?action=like&content=${content.getPostID()}'" class="btn text-white" style="background-color: #9E1915">좋아요 (${likeNum})</button>
+		</form>
 		<%@ include file="/contentPage/comment.jsp" %>
->>>>>>> bafacd432d59323ccd1299f58ec3dcb6851f8c40
-			
+		<% } %>
+		<form>
+				<button type="button" onclick="location.href='/ContentsCtrl?action=list'" class="btn text-white" style="background-color: #9E1915">목록</button>
+	    </form>
 		</div>
 	</div>
 	<script src = "https://code.jquery.com/jquery-3.1.1.min.js"></script>
