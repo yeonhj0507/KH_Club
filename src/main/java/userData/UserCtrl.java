@@ -36,7 +36,7 @@ public class UserCtrl extends HttpServlet {
         
         if(action.equals("logout")) {
         	session.removeAttribute("userID");
-        	response.sendRedirect("/Main.jsp");
+        	response.sendRedirect("/foodCtrl");
         }
         
         if(action.equals("login")) {

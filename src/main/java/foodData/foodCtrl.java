@@ -75,11 +75,10 @@ public class foodCtrl extends HttpServlet {
             String action = request.getParameter("action");
             HttpSession session = request.getSession();
             String userID = (String)session.getAttribute("userID");
-
+            
             if(userID!=null) {
             	request.setAttribute("userID", userID);
             }
-            
             if (action==null || action.equals("login")) {
                 if(todayFood == null) {
                 	request.setAttribute("food", "오늘은 급식이 없습니다.");

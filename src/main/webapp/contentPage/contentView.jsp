@@ -40,13 +40,16 @@
 				</table>
 			</form>
 
-			<%@ include file="/contentPage/comment.jsp" %>
-			
-
-			<form>
-				<button type="button" onclick="location.href='/ContentsCtrl?action=list'" class="btn text-white" style="background-color: #9E1915">좋아요</button>
-			</form>
-			
+		<% if (userID != null) {%>
+		<form>
+			<button type="button" onclick="location.href='/ContentsCtrl?action=like&content=${content.getPostID()}'" class="btn text-white" style="background-color: #9E1915">좋아요 (${likeNum})</button>
+		</form>
+		<%@ include file="/contentPage/comment.jsp" %>
+		<% } %>
+		<form>
+				<button type="button" onclick="location.href='/ContentsCtrl?action=list'" class="btn text-white" style="background-color: #9E1915">목록</button>
+	    </form>
+	    
 		</div>
 	</div>
 	<script src = "https://code.jquery.com/jquery-3.1.1.min.js"></script>

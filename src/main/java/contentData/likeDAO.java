@@ -44,25 +44,28 @@ public class likeDAO {
 
 		 close();
 	 }
-	 public likeDO getByIndex(int index){
+	 
+	 public List<likeDO> getByTitle(String title){
 		 open();
-		 likeDO like = new likeDO();
+		 ArrayList<likeDO> likeLog = new ArrayList<likeDO>();
 		 
 		 try {
-			 String sql = "SELECT * FROM likeLog where index = ?";
+			 String sql = "SELECT * FROM likeLog where content = ?";
 			 pstmt=conn.prepareStatement(sql);
-			 pstmt.setInt(1, index);
+			 pstmt.setString(1, title);
 			 rs = pstmt.executeQuery();
 			 
 			 while(rs.next()) {
+				 likeDO like = new likeDO();
 				 like.setIndex(rs.getInt("index"));
 				 like.setContentTitle(rs.getString("content"));
 				 like.setUserID(rs.getString("userID"));
+				 likeLog.add(like);
 			 }
 		 }catch(Exception e) {e.printStackTrace();}
 		 
 		 close();
-		 return like;
+		 return likeLog;
 	 }
 	 
 	 public List<likeDO> getAll(){
@@ -113,13 +116,14 @@ public class likeDAO {
 			int ri = 0;
 			
 			try {
-				String sql = "SELECT COUNT(*) FROM likeID";
+				String sql = "SELECT COUNT(*) FROM likeLog WHERE content = ?";
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, content);
 				rs = pstmt.executeQuery();
 				
 				
 				while(rs.next()) {
-					ri = rs.getInt("COUNT("+content+")");
+					ri = rs.getInt("COUNT(*)");
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
